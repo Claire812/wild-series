@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    {% if series_by_category is not empty %}
+       <br>
+           {% for serie in series_by_category %}
+               {{ serie.id }} /
+               <a href="{{ path("program_show", { id: serie.id }) }}">{{ serie.title }}</a> </br>
+               {{ serie.summary }} </br>
+
+           {% endfor %}
+       </div>
+    {% endif %}
+    {% if series_by_category is empty %}
+        <p>Aucune série trouvée</p>
+    {% endif %}
+
+
+    <a href="{{ path('category_index') }}">
+        Retour à la liste des catégories
+    </a>
+
+{% endblock %}
