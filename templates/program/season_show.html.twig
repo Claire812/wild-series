@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Les saisons de {{ program.title }}{% endblock %}
+
+{% block body %}
+    <div class="media">
+        <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
+        <div class="media-body">
+            <h1 class="mt-0">{{ program.title }}</h1>
+            <p>{{ program.summary }}</p>
+            <p>Catégorie : {{ program.category.name }}</p>
+            <h2>{{ season.description }}</h2>
+            {% for episode in episodes %}
+                <ul>
+                    <br>{{ episode.number }} / {{ episode.title }} </br> {{ episode.synopsis }}</li>
+                </ul>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
