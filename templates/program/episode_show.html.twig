@@ -10,11 +10,9 @@
             <p>{{ program.summary }}</p>
             <p>Catégorie : {{ program.category.name }}</p>
             <h2>{{ season.description }}</h2>
-            {% for episode in episodes %}
                 <ul>
-                    <br>{{ episode.number }} / <a href="{{ path('program_episode_show', { "program_id": program.id, "season_id": season.id, "episode_id": episode.id })}}">{{ episode.title }}</a> </br>
+                    <br>{{ episode.number }} / {{ episode.title }} </br> <li> {{ episode.synopsis }}</li>
                 </ul>
-            {% endfor %}
         </div>
     </div>
 {% endblock %}

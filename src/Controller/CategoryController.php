@@ -47,7 +47,7 @@ class CategoryController extends AbstractController
         if ($category) {
             $seriesByCategory = $this->getDoctrine()
                 ->getRepository(Program::class)
-                ->findBy(['category' => $category], ['id'=>'ASC'], 3);
+                ->findBy(['category' => $category], ['id'=>'DESC'], 3);
         }
 
         return $this->render('category/show.html.twig', [
