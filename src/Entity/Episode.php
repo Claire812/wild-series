@@ -5,8 +5,11 @@ namespace App\Entity;
 use App\Repository\EpisodeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+
+
 /**
  * @ORM\Entity(repositoryClass=EpisodeRepository::class)
+ *
  */
 class Episode
 {
@@ -25,6 +28,7 @@ class Episode
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      */
     private $title;
 
@@ -35,6 +39,7 @@ class Episode
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     *
      */
     private $synopsis;
 
