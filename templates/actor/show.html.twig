@@ -6,7 +6,7 @@
         <ul>
             {% for program in actor.programs %}
                 <li>
-                    <a href="{{ path("program_show", { 'program_id' : program.id }) }}">{{ program.title }}</a>
+                    <a href="{{ path("program_show", { slug : program.slug }) }}">{{ program.title }}</a>
                 </li>
             {% endfor %}
         </ul>

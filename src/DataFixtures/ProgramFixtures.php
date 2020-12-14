@@ -3,6 +3,7 @@
 
 namespace App\DataFixtures;
 
+use App\Service\Slugify;
 use Faker;
 use App\Entity\Program;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -44,6 +45,13 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
 
         ],
     ];
+    private $slugify;
+
+    public function __construct(Slugify $slugify)
+    {
+        $this->slugify = $slugify;
+    }
+
 
 
     public function load(ObjectManager $manager)
@@ -53,6 +61,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program = new Program();
             $faker = Faker\Factory::create('fr_FR');
             $program->setTitle($faker->title);
+            $slugTitle = $this->slugify->generate($title);
+            $program->setSlug($slugTitle);
             $program->setSummary($faker->sentence);
             $program->setYear($faker->year);
             $program->setCountry($faker->country);
