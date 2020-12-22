@@ -15,4 +15,29 @@
                 </ul>
         </div>
     </div>
+
+    <table>
+        <tr>
+            <th>Commentaire</th>
+            <th></th>
+            <th>Rate</th>
+            <th>User</th>
+        </tr>
+        {% for onecomment in comments|reverse %}
+            <tr>
+                <th>{{ onecomment.comment }}</th>
+                <th></th>
+                <th>{{ onecomment.rate }}</th>
+                <th>{{ onecomment.author.email}}</th>
+            </tr>
+        {% endfor %}
+    </table>
+
+    {% if app.user %}
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type='submit' value='Add comment'>
+        {{ form_end(form) }}
+    {% endif %}
+
 {% endblock %}
