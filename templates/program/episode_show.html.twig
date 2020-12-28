@@ -29,15 +29,19 @@
                 <th></th>
                 <th>{{ onecomment.rate }}</th>
                 <th>{{ onecomment.author.email}}</th>
+                <th>
+                    {% if (is_granted('ROLE_ADMIN') or ((is_granted('ROLE_CONTRIBUTOR')) and (app.user.email == onecomment.author.email))) %}
+                        <a href="{{ path('comment_edit', {"comment_id": onecomment.id}) }}">edit</a>
+                    {% endif %}
+                </th>
             </tr>
         {% endfor %}
     </table>
 
     {% if app.user %}
-        {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <input type='submit' value='Add comment'>
-        {{ form_end(form) }}
+        <a href="{{ path("comment_new", {"episodeSlug": episode.slug }) }}">Ajouter un commentaire</a>
     {% endif %}
+
+
 
 {% endblock %}

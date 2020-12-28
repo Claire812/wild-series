@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @Route("/programs", name="program_")
@@ -54,6 +55,7 @@ class ProgramController extends AbstractController
             $slug = $slugify->generate($program->getTitle());
             $program->setSlug($slug);
             $entityManager->persist($program);
+            $program->setOwner($this->getUser());
             $entityManager->flush();
 
             $email = (new Email())
@@ -97,6 +99,32 @@ class ProgramController extends AbstractController
             'seasons' => $seasons,
         ]);
 
+    }
+
+    /**
+     * @Route("/{slug}/edit", name="edit")
+     * @ParamConverter ("program", class="App\Entity\Program", options={"mapping": {"slug": "slug"}} )
+     *
+     */
+    public function edit(Request $request, Program $program): Response
+    {
+        if (!($this->getUser() == $program->getOwner())) {
+            throw new AccessDeniedException('Seulement les propriétaires de la série peuvent l\'éditer !');
+        }
+
+        $form = $this->createForm(ProgramType::class, $program);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('program_index');
+        }
+
+        return $this->render('program/edit.html.twig', [
+            'program' => $program,
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
