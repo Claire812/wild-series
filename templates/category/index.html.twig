@@ -8,13 +8,13 @@
     {% for category in categories %}
         <div>
             <h2>{{ loop.index }} /
-                <a href="{{ path("category_show", { categoryName: category.name }) }}">{{ category.name }}</a></h2>
+                <a href="{{ path("category_show", { "categorySlug" : category.name }) }}">{{ category.name }}</a></h2>
         </div>
     {% else %}
         Aucune categorie trouvée.
     {% endfor %}
 
-    <a href="{{ path('app_index') }}">
+    <a href="{{ path('program_index') }}">
         Retour à l'accueil
     </a>
 {% endblock %}
