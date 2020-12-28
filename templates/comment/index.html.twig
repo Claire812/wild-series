@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous les commentaires{% endblock %}
+
+{% block body %}
+    {% for onecomment in comments %}
+        {{ onecomment.comment }}
+    {% endfor %}
+{% endblock %}

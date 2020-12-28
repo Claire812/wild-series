@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Comment{% endblock %}
+
+{% block body %}
+    <h1>Edit Comment</h1>
+
+    {{ form_start(form) }}
+         {{ form_widget(form) }}
+         <button type='submit'>Modifier le commentaire</button>
+    {{ form_end(form) }}
+
+    {{ include('comment/_delete_form.html.twig') }}
+
+    <a href="{{ path('program_index') }}">Retour à l'épisode</a>
+
+
+
+
+{% endblock %}
