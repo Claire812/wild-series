@@ -43,6 +43,17 @@ body {
     color: $red-color;
   }
 
+  .form-inscription{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .subscribe {
+    display: contents;
+    justify-content: center;
+  }
 
 
 

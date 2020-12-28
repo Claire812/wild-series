@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Program;
 use App\Form\CategoryType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,7 +57,8 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/{categoryName}", name="show")
+     * @Route("/{categorySlug}", name="show")
+     * @ParamConverter ("category", class="App\Entity\Category", options={"mapping":{"categorySlug":"slug"}} )
      * @return Response
      */
 

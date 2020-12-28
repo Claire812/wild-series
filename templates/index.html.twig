@@ -1,5 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1>Bienvenue sur {{ website }}!</h1>
+<h1>Bienvenue sur Wild Séries !</h1>
+
+    {% for program in programs | reverse %}
+        <div>
+            <h2>{{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h2>
+
+            <a href="{{ path("program_show", {slug: program.slug }) }}">Voir la fiche</a>
+        </div>
+    {% endfor %}
 {% endblock %}
