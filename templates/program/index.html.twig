@@ -3,7 +3,14 @@
 {% block title %}All programs{% endblock %}
 
 {% block body %}
+<div class="form-inline my-2 my-lg-15">
+    {{ form_start(form) }}
+    <div class=" mr-sm-2" >{{ form_widget(form) }}</div>
+    <button class="btn-grad my-2 my-sm-0" type="submit">Search</button>
+    {{ form_end(form) }}
+</div>
     <h1>Toutes les séries </h1>
+
     {% for program in programs %}
         <div>
             <h2>{{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h2>
