@@ -70,6 +70,8 @@ class ProgramController extends AbstractController
             $program->setOwner($this->getUser());
             $entityManager->flush();
 
+            $this->addFlash('success', 'The new program has been created');
+
             $email = (new Email())
                 ->from($this->getParameter('mailer_from'))
                 ->to('your_email@example.com')
