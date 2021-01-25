@@ -44,7 +44,7 @@ class EpisodeController extends AbstractController
             $entityManager->persist($episode);
             $entityManager->flush();
 
-            $this->addFlash('success', 'The new epide has been created');
+            $this->addFlash('success', 'The new episode has been created');
 
             $email = (new Email())
                 ->from($this->getParameter('mailer_from'))

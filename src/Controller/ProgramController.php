@@ -8,10 +8,12 @@ use App\Entity\Comment;
 use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Season;
+use App\Entity\User;
 use App\Form\CommentType;
 use App\Form\ProgramType;
 use App\Form\SearchProgramType;
 use App\Repository\ProgramRepository;
+use App\Repository\UserRepository;
 use App\Service\Slugify;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -90,8 +92,8 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}", name="show")
-     * @ParamConverter("program", class="App\Entity\Program", options={"mapping": {"slug": "slug"}} )
+     * @Route("/{id}", name="show")
+     * @ParamConverter("program", class="App\Entity\Program", options={"mapping": {"id": "id"}} )
      * @return Response
      */
     public function show(Program $program): Response
@@ -208,5 +210,29 @@ class ProgramController extends AbstractController
             'form' => $form->createView(),
 
         ]);
+    }
+
+    /**
+     * @Route ("/{id}/watchlist", name="watchlist", methods={"GET","POST"})
+     * @ParamConverter ("program", class="App\Entity\Program", options={"mapping": {"id":"id"}})
+     */
+
+    public function addToWatchList(Program $program, Request $request, EntityManagerInterface $entityManager)
+    {
+
+        if ($this->getUser()->getPrograms()->contains($program)) {
+            $this->getUser()->removeProgram($program);
+        }
+        else {
+            $this->getUser()->addProgram($program);
+        }
+
+        $entityManager->flush();
+
+
+        return $this->json([
+            'isInWatchlist' => $this->getUser()->isInWatchlist($program)
+        ]);
+
     }
 }

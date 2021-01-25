@@ -1,2 +1,2 @@
-file for video quest 23
-https://www.loom.com/share/5d2c908b54e84a36ad33282a232fe9d2
+file for video quest 24
+https://www.loom.com/share/7c1ffd1b07564e348e534df0bf30e859
